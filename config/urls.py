@@ -23,4 +23,6 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls', namespace='users')),
+    path('diary/', include('diary.urls', namespace='diary')),
+    path("ckeditor/", include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
