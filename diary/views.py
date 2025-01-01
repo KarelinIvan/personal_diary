@@ -34,4 +34,5 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     """ Удаление статьи """
     model = Post
-    success_url = reverse_lazy('diary/index.html')
+    template_name = 'diary/post_delete.html'
+    success_url = reverse_lazy('diary:list_posts')
