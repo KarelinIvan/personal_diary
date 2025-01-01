@@ -15,7 +15,8 @@ class PostListView(ListView):
     model = Post
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'diary/index.html')
+        posts = Post.objects.all()
+        return render(request, 'diary/index.html', context={'posts': posts})
 
 
 class PostDetailView(DetailView):
