@@ -17,7 +17,8 @@
                         <p class="card-text">{{ post.content|safe|truncatechars:200 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{% url 'diary:detail_post' diary.pk %}" class="btn btn-sm btn-link">Подробнее</a>
+                                <a class="btn btn-sm btn-link"
+                                   href="{% url 'diary:detail_post' diary.pk %}">Подробнее</a>
                             </div>
                             <small class="text-muted">{{ post.created_at }}</small>
                         </div>
@@ -47,11 +48,11 @@
             </li>
             {% endif %}
             {% for page_number in page_obj.paginator.page_range %}
-                {% if page_number == page_obj.number %}
-                    <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
-                {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
-                {% endif %}
+            {% if page_number == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
             <li class="page-item">
