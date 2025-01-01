@@ -6,14 +6,20 @@
 {% block content %}
 <section class="all-posts">
     <div class="container">
-        <h1 class="my-4 text-center">Последние записи в дневнике</h1>
-        {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.image }}</p>
-        <p>{{ post.content|safe }}</p>
-        <p>{{ post.created_at }}</p>
-        <p>{{ post.author }}</p>
-        {% endfor %}
+        <h1 class="my-4 text-center">Последние записи в моём дневнике</h1>
+        <div class="row">
+            {% for post in posts %}
+            <div class="row">
+                <div class="card mb-2 shadow-sm">
+                    <img src="media/users/{{ post.title }}" class="card-img-top">
+                    <p>{{ post.image }}</p>
+                    <p>{{ post.content|safe|truncatechars:300 }}</p>
+                    <p>{{ post.created_at }}</p>
+                    <p>{{ post.author }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
