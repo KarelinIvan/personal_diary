@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from diary.models import Post
@@ -30,6 +30,8 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     """ Просмотр статьи """
     model = Post
+    template_name = 'diary/post_detail.html'
+    context_object_name = 'post'
 
 
 class PostUpdateView(UpdateView):
