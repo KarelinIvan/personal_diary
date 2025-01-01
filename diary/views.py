@@ -1,13 +1,16 @@
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from diary.forms import PostForm
 from diary.models import Post
-from django.urls import reverse_lazy
 
 
 class PostCreateView(CreateView):
     """ Создание статьи в дневнике """
     model = Post
-    fields = ('title', 'image', 'content', 'author', 'created_at')
+    form_class = PostForm
+    template_name = 'diary/post_create.html'
+    success_url = reverse_lazy('diary:list_posts')
 
 
 class PostListView(ListView):
