@@ -1,6 +1,7 @@
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from diary.models import Post
+from django.urls import reverse_lazy
 
 
 class PostCreateView(CreateView):
@@ -33,3 +34,4 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     """ Удаление статьи """
     model = Post
+    success_url = reverse_lazy('diary/index.html')
