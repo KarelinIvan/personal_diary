@@ -9,12 +9,12 @@
         <h1 class="my-4 text-center">Последние записи в моём дневнике</h1>
         <div class="row">
             {% for post in posts %}
-            <div class="row">
+            <div class="col">
                 <div class="card mb-2 shadow-sm">
-                    <img src="media/{{ post.image }}" class="card-img-top">
+                    <img src="media/{{ post.image }}"  class="card-img-top">
                     <div class="card-body">
                         <h4 class="card_title">{{ post.title }}</h4>
-                        <p class="card-text">{{ post.content|safe|truncatechars:300 }}</p>
+                        <p class="card-text">{{ post.content|safe|truncatechars:100 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="#" class="btn btn-sm btn-link">Подробнее</a>
