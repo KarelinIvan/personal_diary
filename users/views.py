@@ -25,7 +25,7 @@ class RegisterView(CreateView):
     """ Регистрация нового пользователя с подтверждением через email """
     model = User
     form_class = UserRegisterForm
-    template_name = 'users/register.html'
+    template_name = ''
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
@@ -64,12 +64,12 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 class UserPasswordResetView(PasswordResetView, StyleFormMixin):
     """ Контроллер для восстановления пароля """
 
-    template_name = "users/reset_password.html"
+    template_name = ''
     form_class = PasswordResetForm
-    success_url = reverse_lazy("users:login")
+    success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
-        email = form.cleaned_data["email"]
+        email = form.cleaned_data['email']
         try:
             user = User.objects.get(email=email)
             if user:
@@ -78,17 +78,17 @@ class UserPasswordResetView(PasswordResetView, StyleFormMixin):
                 user.is_active = True
                 user.save()
                 send_mail(
-                    subject="Сброс пароля",
+                    subject='Сброс пароля',
                     message=f" Ваш новый пароль {password}",
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email],
                 )
-            return redirect(reverse("users:login"))
+            return redirect(reverse('users:login'))
         except:
-            return redirect(reverse("users:register"))
+            return redirect(reverse('users:register'))
 
 
 class UserInValidEmail(TemplateView):
     """ Контроллер отработки исключения, когда нет пользователя с таким email """
 
-    template_name = "users/invalid_email.html"
+    template_name = ''
