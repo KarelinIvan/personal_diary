@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from diary.models import Post
@@ -12,6 +13,9 @@ class PostCreateView(CreateView):
 class PostListView(ListView):
     """ Просмотр всех статей """
     model = Post
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'diary/index.html')
 
 
 class PostDetailView(DetailView):
