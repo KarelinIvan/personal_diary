@@ -1,4 +1,4 @@
-{% extends './base.html' %}
+{% extends 'diary/base.html' %}
 {% load static %}
 {% block title %}Регистрация{% endblock %}
 
@@ -10,7 +10,7 @@
                     <!--    ЭТО ХЛЕБНЫЕ КРОШКИ -->
                     <nav aria-label="breadcrumb" class="my-4">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'diary:list_posts' %}">Главная</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Форма регистрации</li>
                         </ol>
                     </nav>
@@ -32,19 +32,19 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
-                                <form method="post" action="{% url 'signup' %}">
+                                <form method="post" action="{% url 'users:registration' %}">
                                     {% csrf_token %}
                                     <div class="mb-3">
                                         <label for="inputUsername" class="form-label visually-hidden">Имя пользователя</label>
-                                        {{ form.username }}
+                                        {{form.username}}
                                     </div>
                                     <div class="mb-3">
                                         <label for="inputPassword" class="form-label visually-hidden">Пароль</label>
-                                        {{ form.password }}
+                                        {{form.password}}
                                     </div>
                                     <div class="mb-3">
                                         <label for="ReInputPassword" class="form-label visually-hidden">Повторите пароль</label>
-                                        {{ form.repeat_password }}
+                                        {{form.repeat_password}}
                                     </div>
                                     <button type="submit" class="btn btn-primary">Регистрация</button>
                                 </form>

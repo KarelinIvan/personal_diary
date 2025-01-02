@@ -25,7 +25,7 @@ class RegisterView(CreateView):
     """ Регистрация нового пользователя с подтверждением через email """
     model = User
     form_class = UserRegisterForm
-    template_name = ''
+    template_name = 'users/registration.html'
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
