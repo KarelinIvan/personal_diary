@@ -10,8 +10,8 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
-from config.settings import EMAIL_HOST_USER
 
+from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm, StyleFormMixin, UserProfileForm
 from users.models import User
 
@@ -44,7 +44,6 @@ class RegisterView(CreateView):
         )
         return super().form_valid(form)
 
-
 def email_verification(request, token):
     user = get_object_or_404(User, token=token)
     user.is_active = True
@@ -64,7 +63,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 class UserPasswordResetView(PasswordResetView, StyleFormMixin):
     """ Контроллер для восстановления пароля """
 
-    template_name = ''
+    template_name = 'users/reset_password.html'
     form_class = PasswordResetForm
     success_url = reverse_lazy('users:login')
 
@@ -85,10 +84,10 @@ class UserPasswordResetView(PasswordResetView, StyleFormMixin):
                 )
             return redirect(reverse('users:login'))
         except:
-            return redirect(reverse('users:register'))
+            return redirect(reverse('users:registration'))
 
 
 class UserInValidEmail(TemplateView):
     """ Контроллер отработки исключения, когда нет пользователя с таким email """
 
-    template_name = ''
+    template_name = 'users:invalid_email'

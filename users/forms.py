@@ -19,11 +19,14 @@ class StyleFormMixin:
 
 class UserRegisterForm(UserCreationForm):
     """ Форма для регистрации нового пользователя """
+
     email = forms.EmailField(required=True, label="Email",
-                             widget=forms.EmailInput(attrs={'placeholder': 'Введите e-mail'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль'}), label="Пароль")
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Повторите пароль'}),
-                                label="Повторите пароль")
+                             widget=forms.EmailInput(
+                                 attrs={'placeholder': 'Введите e-mail', 'class': "form-control", }))
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль', 'class': "form-control", }))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Повторите пароль', 'class': "form-control", }))
 
     class Meta:
         model = User
