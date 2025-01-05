@@ -13,6 +13,13 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'diary/post_create.html'
     success_url = reverse_lazy('diary:list_posts')
 
+    def form_valid(self, form):
+        """ Сохраняет объект модели, установив автора записи """
+        post = form.save(commit=False)
+        post.author = self.request.user  # Присваиваем текущему пользователю
+        post.save()
+        return super().form_valid(form)
+
 
 class PostListView(LoginRequiredMixin, ListView):
     """ Просмотр всех статей """
