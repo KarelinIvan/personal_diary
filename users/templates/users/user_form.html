@@ -10,20 +10,17 @@
                 <nav aria-label="breadcrumb" class="my-4">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url 'diary:list_posts' %}">Главная</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Восстановление пароля</li>
+                        <li class="breadcrumb-item active" aria-current="page">Профиль пользователя</li>
                     </ol>
                 </nav>
 
                 <div class="row justify-content-center">
                     <div class="col-6">
-                        <p class="row justify-content-center">Для восстановления пароля укажите e-mail</p>
-                        <form method="post" action="{% url 'users:reset_password' %}">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
-                                <button type="submit" class="btn btn-primary">Сбросить по e-mail</button>
-                            </div>
-                        </form>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
                     </div>
                 </div>
             </div>

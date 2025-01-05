@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
@@ -5,7 +6,7 @@ from diary.forms import PostForm
 from diary.models import Post
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     """ Создание статьи в дневнике """
     model = Post
     form_class = PostForm
@@ -13,7 +14,7 @@ class PostCreateView(CreateView):
     success_url = reverse_lazy('diary:list_posts')
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     """ Просмотр всех статей """
     model = Post
     template_name = 'diary/index.html'
@@ -21,20 +22,20 @@ class PostListView(ListView):
     paginate_by = 5  # Укажите количество записей на странице
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     """ Просмотр статьи """
     model = Post
     template_name = 'diary/post_detail.html'
     context_object_name = 'post'
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     """ Изменение статьи """
     model = Post
     fields = ('title', 'image', 'content', 'author', 'created_at')
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     """ Удаление статьи """
     model = Post
     template_name = 'diary/post_delete.html'

@@ -16,8 +16,8 @@
                     <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                     <button class="btn btn-outline-success me-2" type="submit">Найти</button>
                 </form>
-                <button type="button" class="btn btn-outline-light">Профиль</button>
-                <button type="button" class="btn btn-outline-light">Выход</button>
+                <a href="{% url 'users:profile' %}" class="btn btn-outline-light me-2">Профиль</a>
+                <a href="{% url 'users:logout' %}" class="btn btn-outline-light me-2">Выход</a>
                 {% else %}
                 <a href="{% url 'users:login' %}" class="btn btn-outline-light me-2">Вход</a>
                 <a href="{% url 'users:registration' %}" class="btn btn-outline-light me-2">Регистрация</a>
