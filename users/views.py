@@ -12,7 +12,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
 
 from config.settings import EMAIL_HOST_USER
-from users.forms import UserRegisterForm, StyleFormMixin, UserProfileForm
+from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 
 
@@ -60,7 +60,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class UserPasswordResetView(PasswordResetView, StyleFormMixin):
+class UserPasswordResetView(PasswordResetView):
     """ Контроллер для восстановления пароля """
 
     template_name = 'users/reset_password.html'
