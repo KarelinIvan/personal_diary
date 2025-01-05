@@ -1,6 +1,7 @@
 import random
 import secrets
 import string
+from django.shortcuts import render
 
 from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordResetForm
@@ -18,12 +19,12 @@ from users.models import User
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return render(request, 'users/logout.html')
 
 
 class RegisterView(CreateView):
     """ Регистрация нового пользователя с подтверждением через email """
-    model = User
+
     form_class = UserRegisterForm
     template_name = 'users/registration.html'
     success_url = reverse_lazy('users:login')
@@ -40,7 +41,7 @@ class RegisterView(CreateView):
             subject='Подтверждение почты',
             message=f'Привет, перейди по ссылке для подтверждения почты {url}',
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email]
+            recipient_list=[user.email,]
         )
         return super().form_valid(form)
 
