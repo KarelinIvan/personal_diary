@@ -19,14 +19,17 @@
                         <p class="row justify-content-center">Для регистрации пользователя укажите e-mail и пароль</p>
                         <form method="post" action="{% url 'users:registration' %}">
                             {% csrf_token %}
-                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                            <div class="d-grid gap-2 col-6 mx-auto mb-2">
                                 {{ form.email }}
+                                <p>Введите e-mail</p>
                             </div>
-                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                            <div class="d-grid gap-2 col-6 mx-auto mb-2">
                                 {{ form.password1 }}
+                                <p>Введите пароль</p>
                             </div>
-                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                            <div class="d-grid gap-2 col-6 mx-auto mb-2">
                                 {{ form.password2 }}
+                                <p>Введите пароль еще раз</p>
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="submit" class="btn btn-primary">Регистрация</button>

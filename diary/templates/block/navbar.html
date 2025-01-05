@@ -11,13 +11,17 @@
                     <a class="nav-link" href="{% url 'diary:list_posts' %}">Главная</a>
                     <a class="nav-link" href="{% url 'diary:create_post' %}">Сделать новую запись</a>
                 </div>
+                {% if user.is_authenticated %}
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                     <button class="btn btn-outline-success me-2" type="submit">Найти</button>
-                    <a href="{% url 'users:login' %}" class="btn btn-outline-light me-2">Вход</a>
-                    <a href="{% url 'users:registration' %}" class="btn btn-outline-light me-2">Регистрация</a>
-                    <button type="button" class="btn btn-outline-light">Выход</button>
                 </form>
+                <button type="button" class="btn btn-outline-light">Профиль</button>
+                <button type="button" class="btn btn-outline-light">Выход</button>
+                {% else %}
+                <a href="{% url 'users:login' %}" class="btn btn-outline-light me-2">Вход</a>
+                <a href="{% url 'users:registration' %}" class="btn btn-outline-light me-2">Регистрация</a>
+                {% endif %}
             </div>
         </div>
     </nav>
