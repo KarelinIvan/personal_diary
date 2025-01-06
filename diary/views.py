@@ -45,7 +45,9 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     """ Изменение статьи """
     model = Post
-    fields = ('title', 'image', 'content', 'author', 'created_at')
+    form_class = PostForm
+    template_name = 'diary/post_update.html'
+    success_url = reverse_lazy('diary:list_posts')
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
