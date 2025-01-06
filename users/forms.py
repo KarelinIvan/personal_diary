@@ -7,13 +7,20 @@ from users.models import User
 class UserRegisterForm(UserCreationForm):
     """ Форма для регистрации нового пользователя """
 
-    # email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'placeholder': 'Введите e-mail'}))
-    # password1 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль'}))
-    # password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль повторно'}))
-
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2')
+
+    # def __init__(self, *args, **kwargs):
+    #     super(UserRegisterForm).__init__(*args, **kwargs)
+    #
+    #     # Установка виджетов
+    #     self.fields['email'].widget = forms.EmailField(
+    #         attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'})
+    #     self.fields['password1'].widget = forms.PasswordInput(
+    #         attrs={'class': 'form-control', 'placeholder': 'Введите пароль'})
+    #     self.fields['password1'].widget = forms.PasswordInput(
+    #         attrs={'class': 'form-control', 'placeholder': 'Введите пароль повторно'})
 
 
 class UserProfileForm(UserChangeForm):
