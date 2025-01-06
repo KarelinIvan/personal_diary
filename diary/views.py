@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, View
+from django.db.models import Q
 from diary.forms import PostForm
 from diary.models import Post
+from django.core.paginator import Paginator
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -47,3 +49,18 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'diary/post_delete.html'
     success_url = reverse_lazy('diary:list_posts')
+
+
+class SearchView(View):
+    """ Контроллер для поиска статьи """
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+        results = ''
+        if query:
+            results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        paginator = Paginator(results, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'diary/search.html',
+                      context={'title': 'Поиск', 'results': page_obj, 'count': paginator.count})
