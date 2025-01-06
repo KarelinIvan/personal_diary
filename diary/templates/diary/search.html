@@ -20,13 +20,15 @@
                 <p class="lead">Найдено записей: {{ count }}</p>
                 {% for result in results %}
                 <a href="{% url 'diary:detail_post' result.pk %}"><h2>{{ result.title }}</h2></a>
-                <p>{{ result.content|safe }}</p>
+                <p>{{ result.content|truncatechars:250|safe }}</p>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
 {% endblock %}
+
+<!--    ПАГИНАЦИЯ -->
 {% block pagination %}
 <section class="my-pagination">
     <nav aria-label="Paginate me">
