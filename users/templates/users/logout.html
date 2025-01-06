@@ -1,0 +1,27 @@
+{% extends 'diary/base.html' %}
+{% load static %}
+{% block title %}Авторизация пользователя{% endblock %}
+
+{% block content %}
+<section class="my-registration-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="my-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'diary:list_posts' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Авторизация</li>
+                    </ol>
+                </nav>
+
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <p>Вышел из системы!</p>
+                        <a href="{% url 'users:login'%}">Нажмите здесь, чтобы войти снова</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

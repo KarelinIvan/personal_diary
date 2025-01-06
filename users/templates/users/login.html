@@ -1,0 +1,43 @@
+{% extends 'diary/base.html' %}
+{% load static %}
+{% block title %}Авторизация пользователя{% endblock %}
+
+{% block content %}
+<section class="my-registration-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="my-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'diary:list_posts' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Авторизация</li>
+                    </ol>
+                </nav>
+
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <p class="row justify-content-center">Для авторизации введите e-mail и пароль</p>
+                        <form method="post" action="{% url 'users:login' %}">
+                            {% csrf_token %}
+                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                                <label for="username">Введите логин</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                                <label for="password">Введите пароль</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </div>
+                        </form>
+                        <div class="d-grid gap-2 col-6 mx-auto mb-8">
+                            <p><a href="{% url 'users:reset_password' %}">Забыли пароль?</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
