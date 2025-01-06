@@ -1,3 +1,36 @@
+<style>
+html, body {
+    margin: 0;
+    height: 100%; /* Обеспечиваем 100% высоты для html и body */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Минимальная высота 100% высоты окна */
+}
+
+.main-content {
+    flex: 1; /* Это позволит главному контенту занимать все доступное пространство */
+    padding: 20px; /* Отступ внутри основного контента */
+    margin-bottom: 60px; /* Отступ для футера */
+}
+
+.my-footer {
+    height: 60px; /* Высота футера */
+    border-top: 2px solid #ccc; /* Граница сверху */
+    background-color: #f8f9fa; /* Цвет фона футера */
+    padding: 1rem 0; /* Вертикальные отступы футера */
+    text-align: center; /* Центрирование текста */
+    position: relative; /* Фиксируем футер внизу относительно своего родителя */
+}
+
+.container {
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: auto; /* Центровка контейнера */
+}
+</style>
+
 <section class="my-footer mt-3">
     <div class="container">
         <div class="row">
