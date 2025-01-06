@@ -17,10 +17,14 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """ Сохраняет объект модели, установив автора записи """
-        post = form.save(commit=False)
-        post.author = self.request.user  # Присваиваем текущему пользователю
-        post.save()
-        return super().form_valid(form)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = self.request.user  # Присваиваем текущему пользователю
+            post.save()
+            return super().form_valid(form)
+        else:
+            print(form.errors) # Выведет ошибки формы в консоль
+            return self.form_invalid(form) # Возвращаем ошибки формы
 
 
 class PostListView(LoginRequiredMixin, ListView):

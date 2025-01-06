@@ -8,7 +8,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 class Post(models.Model):
     """ Модель поста в дневнике """
-    title = models.CharField(max_length=200, verbose_name='Название', help_text='Введите название')
+    title = models.CharField(max_length=200, verbose_name='Название')
     image = models.ImageField(**NULLABLE)
     content = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор статьи')
