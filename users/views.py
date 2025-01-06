@@ -1,7 +1,6 @@
 import random
 import secrets
 import string
-from django.shortcuts import render
 
 from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordResetForm
@@ -9,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
 
@@ -41,7 +41,7 @@ class RegisterView(CreateView):
             subject='Подтверждение почты',
             message=f'Привет, перейди по ссылке для подтверждения почты {url}',
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email,]
+            recipient_list=[user.email, ]
         )
         return super().form_valid(form)
 
@@ -56,10 +56,16 @@ def email_verification(request, token):
 class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
+    template_name = 'users/user_form.html'
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
+        # Возвращаем текущего пользователя, чтобы обновить его профиль
         return self.request.user
+
+    def form_valid(self, form):
+        # Здесь можно добавить логику, которая срабатывает при успешной валидации формы
+        return super().form_valid(form)
 
 
 class UserPasswordResetView(PasswordResetView):

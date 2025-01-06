@@ -4,6 +4,8 @@ from django.urls import path
 from users.apps import UsersConfig
 from users.views import RegisterView, UserInValidEmail, UserPasswordResetView, email_verification, logout_view, \
     ProfileView
+from django.conf.urls.static import static
+from django.conf import settings
 
 app_name = UsersConfig.name
 
@@ -15,4 +17,4 @@ urlpatterns = [
     path('email-confirm/<str:token>/', email_verification, name='email-confirm'),
     path('reset-password/', UserPasswordResetView.as_view(), name='reset_password'),
     path('profile/', ProfileView.as_view(), name='profile'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
