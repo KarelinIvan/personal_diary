@@ -15,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
     #     super(UserRegisterForm).__init__(*args, **kwargs)
     #
     #     # Установка виджетов
-    #     self.fields['email'].widget = forms.EmailField(
+    #     self.fields['email'].widget = forms.EmailInput(
     #         attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'})
     #     self.fields['password1'].widget = forms.PasswordInput(
     #         attrs={'class': 'form-control', 'placeholder': 'Введите пароль'})
