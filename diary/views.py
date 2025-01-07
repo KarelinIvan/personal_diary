@@ -6,6 +6,7 @@ from django.db.models import Q
 from diary.forms import PostForm
 from diary.models import Post
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
