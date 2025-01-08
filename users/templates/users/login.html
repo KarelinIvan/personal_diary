@@ -20,11 +20,9 @@
                         <form method="post" action="{% url 'users:login' %}">
                             {% csrf_token %}
                             <div class="mb-3">
-                                <label for="username" class="form-label">Логин</label>
                                 {{ form.username }}
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Пароль</label>
                                 {{ form.password }}
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
