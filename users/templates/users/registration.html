@@ -13,9 +13,9 @@
                     </ol>
                 </nav>
 
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                        <p class="row justify-content-center">Для регистрации пользователя укажите e-mail и пароль</p>
+                <div class="card border-1 shadow-sm">
+                    <div class="card-body">
+                        <p class="text-center">Для регистрации пользователя укажите e-mail и пароль</p>
                         <form method="post" action="{% url 'users:registration' %}">
                             {% csrf_token %}
                             <div class="d-grid gap-2 col-6 mx-auto mb-2">
@@ -34,7 +34,7 @@
                                 <button type="submit" class="btn btn-primary">Регистрация</button>
                             </div>
 
-                            <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                            <div class="mt-4 text-center">
                                 <a href="{% url 'users:login' %}" class="small">Вернуться к авторизации</a>
                             </div>
                         </form>
