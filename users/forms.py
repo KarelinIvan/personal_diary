@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm, AuthenticationForm
 
 from users.models import User
 
@@ -16,11 +16,14 @@ class UserRegisterForm(UserCreationForm):
 
         # Установка виджетов
         self.fields['email'].widget = forms.EmailInput(
-            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'})
+            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
+        )
         self.fields['password1'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control', 'placeholder': 'Введите пароль'})
+            attrs={'class': 'form-control', 'placeholder': 'Введите пароль'}
+        )
         self.fields['password2'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control', 'placeholder': 'Введите пароль повторно'})
+            attrs={'class': 'form-control', 'placeholder': 'Введите пароль повторно'}
+        )
 
 
 class UserProfileForm(UserChangeForm):
@@ -42,3 +45,30 @@ class ResetPasswordForm(PasswordResetForm):
     class Meta:
         model = User
         fields = ('email',)
+
+    def __init__(self, *args, **kwargs):
+        super(ResetPasswordForm, self).__init__(*args, **kwargs)
+
+        # Установка виджетов
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
+        )
+
+
+class UserAuthForm(AuthenticationForm):
+    """ Форма авторизации пользователя """
+
+    class Meta:
+        model = User
+        fields = ('email', 'password',)
+
+    def __init__(self, *args, **kwargs):
+        super(UserAuthForm, self).__init__(*args, **kwargs)
+
+        # Установка виджета
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
+        )
+        self.fields['password'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Введите пароль'}
+        )
