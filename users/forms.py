@@ -42,17 +42,22 @@ class UserProfileForm(UserChangeForm):
 class ResetPasswordForm(PasswordResetForm):
     """ Форма для сброса пароля """
 
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите e-mail'
+    }))
+
     class Meta:
         model = User
         fields = ('email',)
 
-    def __init__(self, *args, **kwargs):
-        super(ResetPasswordForm, self).__init__(*args, **kwargs)
-
-        # Установка виджетов
-        self.fields['email'].widget = forms.EmailInput(
-            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
-        )
+    # def __init__(self, *args, **kwargs):
+    #     super(ResetPasswordForm, self).__init__(*args, **kwargs)
+    #
+    #     # Установка виджетов
+    #     self.fields['email'].widget = forms.EmailInput(
+    #         attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
+    #     )
 
 
 class UserAuthForm(AuthenticationForm):
