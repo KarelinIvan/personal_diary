@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 from users.models import User
 
@@ -70,7 +70,6 @@ class UserAuthForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserAuthForm, self).__init__(*args, **kwargs)
-        print(self.fields.items())
 
         # Установка виджета
         self.fields['username'].widget = forms.EmailInput(
