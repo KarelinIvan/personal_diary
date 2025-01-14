@@ -3,7 +3,6 @@ import secrets
 import string
 
 from django.contrib.auth import logout
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
@@ -13,7 +12,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
 
 from config.settings import EMAIL_HOST_USER
-from users.forms import UserRegisterForm, UserProfileForm
+from users.forms import UserRegisterForm, UserProfileForm, ResetPasswordForm
 from users.models import User
 
 
@@ -71,8 +70,8 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 class UserPasswordResetView(PasswordResetView):
     """ Контроллер для восстановления пароля """
 
-    template_name = 'users/reset_password.html'
-    form_class = PasswordResetForm
+    template_name = 'users/reset_password_form.html'
+    form_class = ResetPasswordForm
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):

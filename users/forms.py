@@ -39,7 +39,7 @@ class UserProfileForm(UserChangeForm):
         self.fields['password'].widget = forms.HiddenInput()
 
 
-class ResetPasswordForm(PasswordResetForm):
+class ResetPasswordForm(forms.ModelForm):
     """ Форма для сброса пароля """
 
     email = forms.EmailField(widget=forms.EmailInput(attrs={
@@ -51,13 +51,14 @@ class ResetPasswordForm(PasswordResetForm):
         model = User
         fields = ('email',)
 
-    # def __init__(self, *args, **kwargs):
-    #     super(ResetPasswordForm, self).__init__(*args, **kwargs)
-    #
-    #     # Установка виджетов
-    #     self.fields['email'].widget = forms.EmailInput(
-    #         attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
-    #     )
+    def __init__(self, *args, **kwargs):
+        super(ResetPasswordForm, self).__init__(*args, **kwargs)
+        print(self.fields)
+
+        # Установка виджетов
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
+        )
 
 
 class UserAuthForm(AuthenticationForm):
@@ -69,9 +70,10 @@ class UserAuthForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserAuthForm, self).__init__(*args, **kwargs)
+        print(self.fields.items())
 
         # Установка виджета
-        self.fields['email'].widget = forms.EmailInput(
+        self.fields['username'].widget = forms.EmailInput(
             attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
         )
         self.fields['password'].widget = forms.PasswordInput(
