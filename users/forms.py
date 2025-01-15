@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 from users.models import User
 
@@ -39,8 +39,13 @@ class UserProfileForm(UserChangeForm):
         self.fields['password'].widget = forms.HiddenInput()
 
 
-class ResetPasswordForm(PasswordResetForm):
+class ResetPasswordForm(forms.ModelForm):
     """ Форма для сброса пароля """
+
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите e-mail'
+    }))
 
     class Meta:
         model = User
@@ -48,6 +53,7 @@ class ResetPasswordForm(PasswordResetForm):
 
     def __init__(self, *args, **kwargs):
         super(ResetPasswordForm, self).__init__(*args, **kwargs)
+        print(self.fields)
 
         # Установка виджетов
         self.fields['email'].widget = forms.EmailInput(
@@ -66,7 +72,7 @@ class UserAuthForm(AuthenticationForm):
         super(UserAuthForm, self).__init__(*args, **kwargs)
 
         # Установка виджета
-        self.fields['email'].widget = forms.EmailInput(
+        self.fields['username'].widget = forms.EmailInput(
             attrs={'class': 'form-control', 'placeholder': 'Введите e-mail'}
         )
         self.fields['password'].widget = forms.PasswordInput(
