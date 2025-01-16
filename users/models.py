@@ -14,6 +14,8 @@ class User(AbstractUser):
     city = models.CharField(max_length=50, verbose_name='Город', help_text='Укажите город', **NULLABLE)
     avatar = models.ImageField(upload_to='users/media', verbose_name='Аватар', help_text='Загружите фото', **NULLABLE)
 
+    token = models.CharField(max_length=100, verbose_name="Token", blank=True, null=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
