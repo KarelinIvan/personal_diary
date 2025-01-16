@@ -24,8 +24,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             post.save()
             return super().form_valid(form)
         else:
-            print(form.errors) # Выведет ошибки формы в консоль
-            return self.form_invalid(form) # Возвращаем ошибки формы
+            print(form.errors)  # Выведет ошибки формы в консоль
+            return self.form_invalid(form)  # Возвращаем ошибки формы
 
 
 class PostListView(LoginRequiredMixin, ListView):
@@ -35,12 +35,20 @@ class PostListView(LoginRequiredMixin, ListView):
     context_object_name = 'posts'
     paginate_by = 5  # Укажите количество записей на странице
 
+    def get_queryset(self):
+        # Возвращаем только те посты, которые принадлежат текущему пользователю
+        return Post.objects.filter(author=self.request.user)
+
 
 class PostDetailView(LoginRequiredMixin, DetailView):
     """ Просмотр статьи """
     model = Post
     template_name = 'diary/post_detail.html'
     context_object_name = 'post'
+
+    def get_queryset(self):
+        # Возвращаем только те посты, которые принадлежат текущему пользователю
+        return Post.objects.filter(author=self.request.user)
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
@@ -50,12 +58,20 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'diary/post_update.html'
     success_url = reverse_lazy('diary:list_posts')
 
+    def get_queryset(self):
+        # Возвращаем только те посты, которые принадлежат текущему пользователю
+        return Post.objects.filter(author=self.request.user)
+
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     """ Удаление статьи """
     model = Post
     template_name = 'diary/post_delete.html'
     success_url = reverse_lazy('diary:list_posts')
+
+    def get_queryset(self):
+        # Возвращаем только те посты, которые принадлежат текущему пользователю
+        return Post.objects.filter(author=self.request.user)
 
 
 class SearchView(View):
@@ -71,3 +87,7 @@ class SearchView(View):
         page_obj = paginator.get_page(page_number)
         return render(request, 'diary/search.html',
                       context={'title': 'Поиск', 'results': page_obj, 'count': paginator.count})
+
+    def get_queryset(self):
+        # Возвращаем только те посты, которые принадлежат текущему пользователю
+        return Post.objects.filter(author=self.request.user)
