@@ -4,12 +4,11 @@ import string
 
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, UpdateView, TemplateView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView
 
 from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm, UserProfileForm, ResetPasswordForm
@@ -68,7 +67,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class UserPasswordResetView(PasswordResetView):
+class UserPasswordResetView(FormView):
     """ Контроллер для восстановления пароля """
 
     template_name = 'users/reset_password_form.html'
@@ -90,7 +89,7 @@ class UserPasswordResetView(PasswordResetView):
                     from_email=EMAIL_HOST_USER,
                     recipient_list=[user.email],
                 )
-            return redirect(reverse('users:login'))
+            return super().form_valid(form)
         except:
             return redirect(reverse('users:registration'))
 

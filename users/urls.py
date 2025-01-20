@@ -18,4 +18,4 @@ urlpatterns = [
     path('email-confirm/<str:token>/', email_verification, name='email-confirm'),
     path('reset-password/', UserPasswordResetView.as_view(), name='reset_password'),
     path('profile/', ProfileView.as_view(), name='profile'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
