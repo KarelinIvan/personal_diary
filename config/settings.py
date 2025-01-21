@@ -124,12 +124,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    '/personal_diary/static/',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+#     '/personal_diary/static/',
+# ]
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Тип поля первичного ключа по умолчанию
@@ -141,10 +142,10 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'diary:list_posts'
 LOGOUT_REDIRECT_URL = '/'
 
-LOGIN_URL = "users:login"
+LOGIN_URL = 'users:login'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     "default": {
         "removePlugins": "stylesheetparser",
